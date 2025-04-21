@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kshitiz Sharma | ML Engineer Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -15,7 +15,9 @@
       --card-dark: #1e1e1e;
       --accent: #4ecca3;
     }
+
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -23,11 +25,12 @@
       color: var(--text-light);
       transition: background 0.3s, color 0.3s;
     }
+
     body.dark-mode {
       background: var(--bg-dark);
       color: var(--text-dark);
     }
-    /* Navbar */
+
     .navbar {
       position: sticky;
       top: 0;
@@ -39,45 +42,52 @@
       padding: 1rem 2rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       z-index: 100;
+      flex-wrap: wrap;
       transition: background 0.3s;
     }
+
     body.dark-mode .navbar { background: var(--card-dark); }
-    .navbar .logo {
+
+    .logo {
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--accent);
       text-decoration: none;
     }
+
     .navbar ul {
       list-style: none;
       display: flex;
       gap: 1.5rem;
       margin: 0;
       padding: 0;
+      flex-wrap: wrap;
     }
+
     .navbar ul li a {
       text-decoration: none;
       color: var(--text-light);
       font-weight: 500;
-      position: relative;
       transition: color 0.3s;
     }
-    .navbar ul li a:hover,
-    .navbar ul li a.active {
+
+    .navbar ul li a:hover, .navbar ul li a.active {
       color: var(--accent);
     }
-    /* Toggle */
+
+    body.dark-mode .navbar ul li a { color: var(--text-dark); }
+
     .toggle-mode {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: var(--text-light);
-      margin-left: 1rem;
       transition: color 0.3s;
     }
+
     body.dark-mode .toggle-mode { color: var(--text-dark); }
-    /* Sections */
+
     section {
       padding: 4rem 2rem;
       max-width: 1000px;
@@ -86,23 +96,28 @@
       transform: translateY(20px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
+
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     #home {
       text-align: center;
       padding-top: 6rem;
     }
+
     #home h1 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
+
     #home p {
       font-size: 1.2rem;
       color: #555;
       margin-bottom: 1.5rem;
     }
+
     #home .buttons a {
       margin: 0 0.5rem;
       padding: 0.6rem 1.2rem;
@@ -112,13 +127,15 @@
       text-decoration: none;
       transition: background 0.3s;
     }
+
     #home .buttons a:hover { background: #3ca882; }
-    /* Projects Grid */
+
     .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
+
     .project {
       background: var(--card-light);
       border-radius: 8px;
@@ -128,20 +145,25 @@
       flex-direction: column;
       transition: transform 0.3s;
     }
+
     body.dark-mode .project { background: var(--card-dark); }
+
     .project:hover { transform: translateY(-5px); }
+
     .project-content {
       padding: 1.5rem;
       flex: 1;
     }
+
     .project-content h3 {
       margin-top: 0;
       color: var(--accent);
     }
-    .project-content p {
-      flex: 1;
-      color: #444;
-    }
+
+    .project-content p { color: #444; }
+
+    body.dark-mode .project-content p { color: #ccc; }
+
     .project-footer {
       padding: 1rem 1.5rem;
       border-top: 1px solid #eee;
@@ -149,18 +171,119 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .project-footer a {
       text-decoration: none;
       color: var(--accent);
     }
-    /* Contact */
+
     #contact p { font-size: 1rem; }
-    /* Responsive */
-    @media (max-width: 600px) {
-      .navbar { flex-direction: column; gap: 1rem; }
-      #home h1 { font-size: 2rem; }
-      #home p { font-size: 1rem; }
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
+
+    .modal.open { display: flex; }
+
+    .modal-content {
+      background: #fff;
+      max-width: 90%;
+      max-height: 80%;
+      overflow: auto;
+      border-radius: 8px;
+      position: relative;
+      padding: 1rem;
+    }
+
+    body.dark-mode .modal-content { background: #2a2a2a; }
+
+    .modal-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      #home h1 { font-size: 2rem; }
+
+      #home p { font-size: 1rem; }
+
+      .modal-content { padding: 0.5rem; }
+    }
+
+    .project-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      background: var(--card-light);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+
+    body.dark-mode .project-card {
+      background: var(--card-dark);
+    }
+
+    .project-card img {
+      width: 140px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .project-text {
+      flex: 1;
+    }
+
+    .project-text h3 {
+      margin: 0 0 0.5rem 0;
+      color: var(--accent);
+    }
+
+    .project-text p {
+      margin: 0 0 0.5rem 0;
+      color: #444;
+    }
+
+    body.dark-mode .project-text p {
+      color: #ccc;
+    }
+
+    .project-text a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
   </style>
 </head>
 <body>
@@ -168,15 +291,16 @@
     <a href="#home" class="logo">Kshitiz Sharma</a>
     <ul>
       <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#creative">Beyond Tech</a></li>
       <li><a href="#contact">Get in Touch</a></li>
     </ul>
     <button class="toggle-mode" onclick="toggleDarkMode()">🌙</button>
   </nav>
 
   <section id="home">
-    <h1>ML Engineer • Ex-Oracle • IIT Kharagpur</h1>
+    <h1>ML Engineer • Oracle • IIT Kharagpur</h1>
     <p>Building production-grade ML pipelines & scalable systems.</p>
     <div class="buttons">
       <a href="https://github.com/KshitizS9082" target="_blank">GitHub</a>
@@ -184,37 +308,139 @@
     </div>
   </section>
 
-  <section id="projects">
-    <h2>Highlighted Projects</h2>
-    <div class="projects">
-      <div class="project">
-        <div class="project-content">
-          <h3>ScreenHue</h3>
-          <p>macOS utility to adjust screen temperature using camera feed, reducing eye strain.</p>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/KshitizS9082/ScreenHue" target="_blank">View Code</a>
-          <button onclick="openModal('screenhueModal')">Demo ▶</button>
-        </div>
-      </div>
-      <!-- Repeat .project for others -->
+  <section id="experience">
+    <h2>Experience</h2>
+  
+    <div class="experience-item">
+      <h3>Senior Software Engineer (IC3)</h3>
+      <p><strong>Oracle Corporation (Logistics AI Team) | Sept 2024 – Present</strong></p>
+      <ul>
+        <li>Built an NLP-driven HS code classifier for global trade, achieving 89% top-3 accuracy.</li>
+        <li>Mentored the winning team at Oracle IDC’s New Hires GenAI Hackathon, developing an LLM-based support automation tool.</li>
+        <li>Represented the ML development team at OTM SIG’24 in Bangalore, presenting innovations to product stakeholders.</li>
+      </ul>
+    </div>
+  
+    <div class="experience-item">
+      <h3>Software Engineer (IC2)</h3>
+      <p><strong>Oracle Corporation (Logistics AI Team) | Jul 2022 – Aug 2024</strong></p>
+      <ul>
+        <li>Architected and implemented EML v2.0 – a scalable, containerized MLaaS infrastructure using Oracle Machine Learning.</li>
+        <li>Deployed a shipment transit time estimation model with domain-specific encodings, improving accuracy by 50% (RMSLE).</li>
+        <li>Built EML v1.0 with Django, Celery, and Dask on OCI, achieving a 20% speedup in model training via distributed architecture.</li>
+      </ul>
+    </div>
+  
+    <div class="experience-item">
+      <h3>ML Intern</h3>
+      <p><strong>Oracle Transportation Management | May 2021 – Jul 2021</strong></p>
+      <ul>
+        <li>Developed a predictive API to estimate runtime of a heuristic algorithm for better resource scheduling.</li>
+        <li>Built ensemble models using scikit-learn, achieving RMSE of 2.6 hours.</li>
+      </ul>
     </div>
   </section>
+  
+  <section id="projects">
+    <h2>Highlighted Projects</h2>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I specialize in developing production-grade ML pipelines, having worked across both data science and ML infrastructure roles. Previously at Oracle, I spearheaded ML solutions for logistics systems, and I continue to build projects that combine modeling, systems design, and real-world impact.</p>
+    <div class="project-card">
+      <img src="assets/legal-search.jpg" alt="Legal Search Engine project">
+      <div class="project-text">
+        <h3>Legal Search Engine</h3>
+        <p>Search engine to extract and rank information from 53,000+ Indian court judgments. Used Elasticsearch + MongoDB.</p>
+        <a href="https://github.com/KshitizS9082/Legal-Search-Engine" target="_blank">View Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="assets/screenhue-thumb.jpg" alt="ScreenHue project">
+      <div class="project-text">
+        <h3>ScreenHue</h3>
+        <p>macOS utility to adjust screen temperature using camera feed, reducing eye strain.</p>
+        <a href="https://github.com/KshitizS9082/ScreenHue" target="_blank">View Code →</a>
+      </div>
+    </div>
+    
+    <div class="project-card">
+      <img src="assets/upi.jpg" alt="UPI project">
+      <div class="project-text">
+        <h3>UPI Pay</h3>
+        <p>Dummy UPI iOS app used for behavioral research on user-side security in payment apps. Presented at USENIX SOUPS '22.</p>
+        <a href="https://github.com/KshitizS9082/UPI-Pay" target="_blank">View Code →</a>
+      </div>
+    </div>
+    
+    
+    <div class="project-card">
+      <video autoplay loop muted playsinline width="140" height="100">
+        <source src="assets/dossier-temp-demo.mp4" type="video/mp4">
+      </video>      
+      <div class="project-text">
+        <h3>Dossier</h3>
+        <p>iOS productivity app combining Kanban boards, Gantt charts, and journal tracking. Built with Swift + CloudKit.</p>
+        <a href="https://github.com/KshitizS9082/Dossier" target="_blank">View Code →</a>
+      </div>
+    </div>
+    
+    <div class="project-card">
+      <img src="assets/call-graph.png" alt="Call Graph Miner project">
+      <div class="project-text">
+        <h3>Call Graph Miner</h3>
+        <p>Static analysis tool to find sensitive data flows in Android APKs, with facial recognition library focus.</p>
+        <a href="https://github.com/KshitizS9082/Call-graph-miner" target="_blank">View Code →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="assets/sendox33.jpg" alt="Sendox33 project">
+      <div class="project-text">
+        <h3>Sendox33</h3>
+        <p>End-to-end encrypted Android messaging app built with RSA-AES cryptography and Java sockets.</p>
+        <a href="https://github.com/KshitizS9082/Sendox33" target="_blank">View Code →</a>
+      </div>
+    </div>
+    
   </section>
+  
+  <section id="creative">
+    <h2>Beyond Tech</h2>
+    <p>I balance my work with creative exploration — through photography and sketching.</p>
+  
+    <div class="projects">
+      <!-- Photography Card -->
+      <div class="project">
+        <div class="project-content">
+          <h3>Photography</h3>
+          <p>I shoot symmetry, solitude, and sunlight. You can find my lenswork featured on Unsplash under the alias <strong>blindpolaroid</strong>.</p>
+        </div>
+        <div class="project-footer">
+          <a href="https://unsplash.com/@blindpolaroid" target="_blank">View Gallery →</a>
+        </div>
+      </div>
+  
+      <!-- Sketching Card -->
+      <div class="project">
+        <div class="project-content">
+          <h3>Sketching</h3>
+          <p>My sketching practice is loose and emotional — faces, forms, and fleeting ideas. I post them on Pinterest occasionally.</p>
+        </div>
+        <div class="project-footer">
+          <a href="https://in.pinterest.com/blindPolaroid/blindpolaroids-sketches/" target="_blank">See Sketches →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
   <section id="contact">
     <h2>Get in Touch</h2>
-    <p>Email: <a href="mailto:kshitiz.sharma9082@gmail.com">kshitiz.sharma9082@gmail.com</a></p>
+    <p>Email: <a href="mailto:kshitizsharma.dev@gmail.com">kshitizsharma.dev@gmail.com</a></p>
   </section>
 
-  <!-- Modal Template: duplicate for each project -->
   <div id="screenhueModal" class="modal" onclick="closeModal('screenhueModal')">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closeModal('screenhueModal')">&times; </span>
+      <span class="modal-close" onclick="closeModal('screenhueModal')">&times;</span>
       <video controls>
         <source src="assets/screenhue-demo.mp4" type="video/mp4">
       </video>
@@ -222,10 +448,9 @@
   </div>
 
   <script>
-    // Section fade-in on scroll
     document.addEventListener('DOMContentLoaded', () => {
       const sections = document.querySelectorAll('section');
-      const observer = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
@@ -234,12 +459,23 @@
         });
       }, { threshold: 0.2 });
       sections.forEach(sec => observer.observe(sec));
+
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+      }
     });
+
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
     }
-    function openModal(id) { document.getElementById(id).classList.add('open'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
   </script>
 </body>
 </html>
