@@ -1,119 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kshitiz Sharma | ML Engineer Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-light: #f0f2f5;
+      --bg-dark: #121212;
+      --text-light: #222;
+      --text-dark: #eee;
+      --card-light: #fff;
+      --card-dark: #1e1e1e;
+      --accent: #4ecca3;
+    }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #f8f9fa;
-      color: #212529;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
     }
-    header {
-      background-color: #ffffff;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--card-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 100;
+      transition: background 0.3s;
     }
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
-      color: #555;
-    }
-    .buttons a {
-      display: inline-block;
-      margin: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: #0066cc;
-      color: #fff;
+    body.dark-mode .navbar { background: var(--card-dark); }
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent);
       text-decoration: none;
-      border-radius: 5px;
     }
-    main {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
     }
+    .navbar ul li a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .navbar ul li a:hover,
+    .navbar ul li a.active {
+      color: var(--accent);
+    }
+    /* Toggle */
+    .toggle-mode {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-light);
+      margin-left: 1rem;
+      transition: color 0.3s;
+    }
+    body.dark-mode .toggle-mode { color: var(--text-dark); }
+    /* Sections */
     section {
-      margin-bottom: 3rem;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    h2 {
-      color: #003366;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.5rem;
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #home {
+      text-align: center;
+      padding-top: 6rem;
+    }
+    #home h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    #home p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+    #home .buttons a {
+      margin: 0 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    #home .buttons a:hover { background: #3ca882; }
+    /* Projects Grid */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
     .project {
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 1px solid #ddd;
+      background: var(--card-light);
       border-radius: 8px;
-      background: #ffffff;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
     }
-    .project a {
-      color: #0066cc;
+    body.dark-mode .project { background: var(--card-dark); }
+    .project:hover { transform: translateY(-5px); }
+    .project-content {
+      padding: 1.5rem;
+      flex: 1;
+    }
+    .project-content h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    .project-content p {
+      flex: 1;
+      color: #444;
+    }
+    .project-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .project-footer a {
       text-decoration: none;
+      color: var(--accent);
+    }
+    /* Contact */
+    #contact p { font-size: 1rem; }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .navbar { flex-direction: column; gap: 1rem; }
+      #home h1 { font-size: 2rem; }
+      #home p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Kshitiz Sharma</h1>
-    <p>ML Engineer • Ex-Oracle • IIT Kharagpur CSE</p>
+  <nav class="navbar">
+    <a href="#home" class="logo">Kshitiz Sharma</a>
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Get in Touch</a></li>
+    </ul>
+    <button class="toggle-mode" onclick="toggleDarkMode()">🌙</button>
+  </nav>
+
+  <section id="home">
+    <h1>ML Engineer • Ex-Oracle • IIT Kharagpur</h1>
+    <p>Building production-grade ML pipelines & scalable systems.</p>
     <div class="buttons">
       <a href="https://github.com/KshitizS9082" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/kshitiz-sharma-9082" target="_blank">LinkedIn</a>
-      <a href="./Kshitiz_Sharma_Resume.pdf" target="_blank">Resume</a>
+      <a href="https://www.linkedin.com/in/kshitiziitkgp/" target="_blank">LinkedIn</a>
     </div>
-  </header>
-  <main>
-    <section>
-      <h2>About Me</h2>
-      <p>I specialize in developing production-grade ML pipelines, having worked across both data science and ML infrastructure roles. Previously at Oracle, I spearheaded ML solutions for logistics systems, and I continue to build projects that combine modeling, systems design, and real-world impact.</p>
-    </section>
-    <section>
-      <h2>Highlighted Projects</h2>
+  </section>
 
+  <section id="projects">
+    <h2>Highlighted Projects</h2>
+    <div class="projects">
       <div class="project">
-        <h3>DroidTaint</h3>
-        <p>Static analysis tool for identifying sensitive data flows in Android apps using facial recognition libraries. Built with Selenium, Androguard, and PScout.</p>
-        <a href="https://github.com/KshitizS9082/DroidTaint" target="_blank">View on GitHub</a>
+        <div class="project-content">
+          <h3>ScreenHue</h3>
+          <p>macOS utility to adjust screen temperature using camera feed, reducing eye strain.</p>
+        </div>
+        <div class="project-footer">
+          <a href="https://github.com/KshitizS9082/ScreenHue" target="_blank">View Code</a>
+          <button onclick="openModal('screenhueModal')">Demo ▶</button>
+        </div>
       </div>
+      <!-- Repeat .project for others -->
+    </div>
+  </section>
 
-      <div class="project">
-        <h3>FOLIO (Life Organizer App)</h3>
-        <p>iOS/iPadOS app combining Gantt chart, Kanban board, and financial journal features. Used CloudKit, FileManager, and SwiftUI for collaboration and sync.</p>
-        <a href="https://github.com/KshitizS9082/Folio" target="_blank">View on GitHub</a>
-      </div>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I specialize in developing production-grade ML pipelines, having worked across both data science and ML infrastructure roles. Previously at Oracle, I spearheaded ML solutions for logistics systems, and I continue to build projects that combine modeling, systems design, and real-world impact.</p>
+  </section>
 
-      <div class="project">
-        <h3>SENDOX (E2EE Messaging)</h3>
-        <p>End-to-end encrypted Android messaging service using RSA public-key cryptography with a custom Java socket server and MySQL backend.</p>
-        <a href="https://github.com/KshitizS9082/SENDOX" target="_blank">View on GitHub</a>
-      </div>
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <p>Email: <a href="mailto:kshitiz.sharma9082@gmail.com">kshitiz.sharma9082@gmail.com</a></p>
+  </section>
 
-      <div class="project">
-        <h3>Conditional Affordance Learning</h3>
-        <p>Trained a multi-task learning (MTL) model to represent driving affordances in urban environments. Explored integration with A* planning modules for autonomous navigation.</p>
-        <a href="https://github.com/KshitizS9082/conditional-affordance-driving" target="_blank">View on GitHub</a>
-      </div>
+  <!-- Modal Template: duplicate for each project -->
+  <div id="screenhueModal" class="modal" onclick="closeModal('screenhueModal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="modal-close" onclick="closeModal('screenhueModal')">&times; </span>
+      <video controls>
+        <source src="assets/screenhue-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
 
-      <div class="project">
-        <h3>EML 2.0 (Enterprise ML Infrastructure)</h3>
-        <p>Production-ready MLaaS for Oracle Transportation Management using Oracle Machine Learning. Built pipelines for transit time and runtime estimations, focusing on maintainability and customer-specific deployment.</p>
-      </div>
-
-    </section>
-    <section>
-      <h2>Contact</h2>
-      <p>Email: kshitiz.sharma9082@gmail.com</p>
-    </section>
-  </main>
+  <script>
+    // Section fade-in on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      sections.forEach(sec => observer.observe(sec));
+    });
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  </script>
 </body>
 </html>
